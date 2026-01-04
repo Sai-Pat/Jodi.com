@@ -1,11 +1,11 @@
 
 ---
 
-# LagnaJulwa – Marriage Bureau Management System
+# Jodi.com – Marriage Bureau
 
 ## 📌 Project Overview
 
-**LagnaJulwa** is a Java-based Marriage Bureau system that manages bride and groom profiles using **CRUD operations**. It uses **SQL** as the backend and **Java** for frontend and business logic. The system simplifies matchmaking, reduces manual work, and keeps records organized.
+**Jodi.com** is a Java-based Marriage Bureau system that manages bride and groom profiles using **CRUD operations**. It uses **SQL** as the backend and **Java** for frontend and business logic. The system simplifies matchmaking, reduces manual work, and keeps records organized.
 
 ---
 
@@ -58,59 +58,141 @@ jodidotcom/
 
 ## 📄 File Details
 
-### 1️⃣ `User.java`
+1️⃣ User.java
 
-* Model (Entity) class
-* Represents a bride/groom profile
-* Contains variables like name, age, gender, profession, contact
-* Includes getters and setters
+Model (Entity) class
 
-### 2️⃣ `UserDAO.java`
+Represents a bride/groom profile
 
-* Data Access Object (DAO)
-* Handles all database operations
-* Performs **Create, Read, Update, Delete (CRUD)**
-* Uses JDBC to interact with SQL
+Contains variables such as:
 
-### 3️⃣ `UserService.java`
+name
 
-* Service layer
-* Contains business logic
-* Acts as a bridge between UI and DAO
-* Calls DAO methods to process data
+age
 
-### 4️⃣ `MainMenu.java`
+gender
 
-* User Interface (Frontend)
-* Displays menu options
-* Takes user input
-* Calls service methods based on choice
+email
 
-### 5️⃣ `DBConnection.java`
+city
 
-* Manages database connection
-* Provides reusable JDBC connection
+profession
 
-### 6️⃣ `Main.java`
+lookingFor
 
-* Entry point of the application
-* Starts the program and loads the main menu
+Implements encapsulation using private fields
 
----
+Includes public getters and setters
 
-## 🔁 Application Flow
+2️⃣ UserDAO.java
 
-```
-User → MainMenu → UserService → UserDAO → SQL Database
-```
+Data Access Object (DAO) interface
 
----
+Defines database operations related to users
 
-## 🛠 Technologies Used
+Declares methods for:
 
-* Java
-* JDBC
-* MySQL (SQL)
+user registration
 
----
+login authentication
 
+fetching matches
+
+Helps separate database logic from business logic
+
+3️⃣ UserDAOImpl.java
+
+Implementation class of UserDAO
+
+Contains actual JDBC code
+
+Performs Create, Read, Update, Delete (CRUD) operations
+
+Uses PreparedStatement and ResultSet
+
+Handles SQL and database-related exceptions
+
+4️⃣ UserService.java
+
+Service layer interface
+
+Contains business logic method definitions
+
+Acts as a bridge between Controller and DAO
+
+Ensures validation and processing before database access
+
+5️⃣ UserServiceImpl.java
+
+Implementation of UserService
+
+Calls DAO methods to perform operations
+
+Keeps controller logic clean and modular
+
+6️⃣ UserController.java
+
+Console-based User Interface (Controller)
+
+Displays menu options:
+
+Register
+
+Login
+
+View Available Matches
+
+Logout / Exit
+
+Takes user input using Scanner
+
+Controls application flow and user session
+
+7️⃣ DBConnection.java
+
+Manages database connectivity
+
+Loads MySQL JDBC Driver
+
+Provides reusable JDBC Connection object
+
+Centralizes database configuration
+
+8️⃣ Validator.java
+
+Base validation interface
+
+Used to define validation structure
+
+9️⃣ UserValidator.java
+
+Handles user-specific validation logic
+
+Enforces rules such as:
+
+age must be between 18 and 60
+
+Prevents invalid data from reaching the database
+
+🔟 MainApp.java
+
+Entry point of the application
+
+Starts the program
+
+Initializes the controller and loads the main menu
+
+🔁 Application Flow
+User → UserController → UserService → UserDAO → MySQL Database
+
+🛠 Technologies Used
+
+Java (Core Java)
+
+JDBC (Java Database Connectivity)
+
+MySQL (SQL)
+
+MVC Architecture
+
+DAO Design Pattern
