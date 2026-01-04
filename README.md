@@ -1,198 +1,181 @@
 
 ---
 
-# Jodi.com – Marriage Bureau
+# 💍 Jodi.com – Marriage Bureau Management System
 
-## 📌 Project Overview
+*(Backend | Console-Based | JDBC & MySQL)*
 
-**Jodi.com** is a Java-based Marriage Bureau system that manages bride and groom profiles using **CRUD operations**. It uses **SQL** as the backend and **Java** for frontend and business logic. The system simplifies matchmaking, reduces manual work, and keeps records organized.
+Jodi.com is a **console-based Marriage Bureau Management System** developed using **Core Java and JDBC**.
+The project focuses on **backend development**, demonstrating clean architecture, database connectivity, and real-world business logic without any graphical UI.
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
-```
+```text
 jodidotcom/
-│
 ├── src/
 │   └── com/
 │       ├── application/
 │       │   └── MainApp.java
-│       │
 │       ├── controller/
 │       │   └── UserController.java
-│       │
 │       ├── model/
 │       │   └── User.java
-│       │
 │       ├── dao/
 │       │   ├── UserDAO.java
 │       │   └── UserDAOImpl.java
-│       │
 │       ├── service/
 │       │   ├── UserService.java
 │       │   └── UserServiceImpl.java
-│       │
 │       ├── util/
-│       │   ├── DBConnection.java
-│       │   ├── LanguageUtil.java
-│       │   └── VoiceUtil.java
-│       │
+│       │   └── DBConnection.java
 │       └── validation/
-│           ├── Validator.java
 │           └── UserValidator.java
-│
 ├── lib/
 │   └── mysql-connector-j-8.0.33.jar
-│
 ├── sql/
 │   └── jodidotcom.sql
-│
-├── README.md
-└── .gitignore
+└── README.md
 ```
-
-> **Note:** Add `.gitkeep` files in empty folders so Git preserves them.
 
 ---
 
 ## 📄 File Details
 
-1️⃣ User.java
+### 1️⃣ `User.java`
 
-Model (Entity) class
+* Model (Entity) class
+* Represents a bride/groom profile
+* Contains fields such as name, age, gender, email, city, profession, and preferences
+* Uses encapsulation with getters and setters
 
-Represents a bride/groom profile
+---
 
-Contains variables such as:
+### 2️⃣ `UserDAO.java`
 
-name
+* Data Access Object (DAO) interface
+* Declares database operations related to users
+* Defines methods for registration, login, and matchmaking
+* Ensures separation of database logic
 
-age
+---
 
-gender
+### 3️⃣ `UserDAOImpl.java`
 
-email
+* Implementation of `UserDAO`
+* Contains actual JDBC code
+* Performs **Create, Read, Update, Delete (CRUD)** operations
+* Uses `PreparedStatement` and `ResultSet`
+* Handles SQL and database exceptions
 
-city
+---
 
-profession
+### 4️⃣ `UserService.java`
 
-lookingFor
+* Service layer interface
+* Defines business logic operations
+* Acts as a bridge between Controller and DAO
 
-Implements encapsulation using private fields
+---
 
-Includes public getters and setters
+### 5️⃣ `UserServiceImpl.java`
 
-2️⃣ UserDAO.java
+* Implements `UserService`
+* Calls DAO methods to process user requests
+* Keeps controller logic clean and modular
 
-Data Access Object (DAO) interface
+---
 
-Defines database operations related to users
+### 6️⃣ `UserController.java`
 
-Declares methods for:
+* Console-based controller (User Interface layer)
+* Displays menu options such as:
 
-user registration
+  * Register
+  * Login
+  * View Available Matches
+  * Logout / Exit
+* Takes user input using `Scanner`
+* Controls application flow and user session
 
-login authentication
+---
 
-fetching matches
+### 7️⃣ `DBConnection.java`
 
-Helps separate database logic from business logic
+* Manages MySQL database connection
+* Loads MySQL JDBC driver
+* Provides reusable JDBC `Connection` object
 
-3️⃣ UserDAOImpl.java
+---
 
-Implementation class of UserDAO
+### 8️⃣ `UserValidator.java`
 
-Contains actual JDBC code
+* Handles input validation logic
+* Enforces business rules such as:
 
-Performs Create, Read, Update, Delete (CRUD) operations
+  * Age must be between **18 and 60**
+* Prevents invalid data from entering the database
 
-Uses PreparedStatement and ResultSet
+---
 
-Handles SQL and database-related exceptions
+### 9️⃣ `MainApp.java`
 
-4️⃣ UserService.java
+* Entry point of the application
+* Starts the program
+* Loads the main controller
 
-Service layer interface
+---
 
-Contains business logic method definitions
+## 🔁 Application Flow
 
-Acts as a bridge between Controller and DAO
-
-Ensures validation and processing before database access
-
-5️⃣ UserServiceImpl.java
-
-Implementation of UserService
-
-Calls DAO methods to perform operations
-
-Keeps controller logic clean and modular
-
-6️⃣ UserController.java
-
-Console-based User Interface (Controller)
-
-Displays menu options:
-
-Register
-
-Login
-
-View Available Matches
-
-Logout / Exit
-
-Takes user input using Scanner
-
-Controls application flow and user session
-
-7️⃣ DBConnection.java
-
-Manages database connectivity
-
-Loads MySQL JDBC Driver
-
-Provides reusable JDBC Connection object
-
-Centralizes database configuration
-
-8️⃣ Validator.java
-
-Base validation interface
-
-Used to define validation structure
-
-9️⃣ UserValidator.java
-
-Handles user-specific validation logic
-
-Enforces rules such as:
-
-age must be between 18 and 60
-
-Prevents invalid data from reaching the database
-
-🔟 MainApp.java
-
-Entry point of the application
-
-Starts the program
-
-Initializes the controller and loads the main menu
-
-🔁 Application Flow
+```text
 User → UserController → UserService → UserDAO → MySQL Database
+```
 
-🛠 Technologies Used
+---
 
-Java (Core Java)
+## 🛠 Technologies Used
 
-JDBC (Java Database Connectivity)
+* Java (Core Java)
+* JDBC (Java Database Connectivity)
+* MySQL (SQL Database)
+* MVC Architecture
+* DAO Design Pattern
 
-MySQL (SQL)
+---
 
-MVC Architecture
+## 🎓 Academic Purpose
 
-DAO Design Pattern
+This project demonstrates:
+
+* Object-Oriented Programming concepts
+* JDBC-based database connectivity
+* Clean backend architecture
+* Exception handling
+* Real-world console application flow
+
+---
+
+## 🚀 How to Run
+
+1. Create the database using `jodidotcom.sql`
+2. Add MySQL Connector/J to the `lib` folder
+3. Compile the project from `src`:
+
+   ```bash
+   javac -cp ".;../lib/mysql-connector-j-8.0.33.jar" com/application/MainApp.java
+   ```
+4. Run the application:
+
+   ```bash
+   java -cp ".;../lib/mysql-connector-j-8.0.33.jar" com.application.MainApp
+   ```
+
+---
+
+## 📌 Note
+
+This project is intentionally **console-based** to focus on backend development, database operations, and clean architecture rather than UI design.
+
+---
