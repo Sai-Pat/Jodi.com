@@ -9,6 +9,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO dao = new UserDAOImpl();
+    @Override
+public boolean updateUser(User user) {
+    return dao.updateUser(user);
+}
+
+@Override
+public boolean deleteUser(String email) {
+    return dao.deleteUser(email);
+}
+
 
     public boolean registerUser(User user) {
         return dao.registerUser(user);

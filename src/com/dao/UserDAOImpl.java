@@ -50,12 +50,14 @@ public User login(String email, String password) {
 
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            User u = new User();
-            u.setName(rs.getString("name"));
-            u.setCity(rs.getString("city"));
-            u.setGender(rs.getString("gender"));        
-            u.setLookingFor(rs.getString("looking_for"));
-            return u;
+User u = new User();
+u.setName(rs.getString("name"));
+u.setEmail(rs.getString("email"));          
+u.setCity(rs.getString("city"));
+u.setGender(rs.getString("gender"));
+u.setLookingFor(rs.getString("looking_for"));
+return u;
+
         }
 
     } catch (SQLException e) {
@@ -63,14 +65,49 @@ public User login(String email, String password) {
     }
     return null;
 }
+@Override
+public boolean deleteUser(String email) {
 
+    String sql = "DELETE FROM users WHERE email=?";
+
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, email);
+        return ps.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+        System.out.println("❌ Error deleting profile.");
+    }
+    return false;
+}
+
+@Override
+public boolean updateUser(User user) {
+
+    String sql = "UPDATE users SET city=?, profession=? WHERE email=?";
+
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, user.getCity());
+        ps.setString(2, user.getProfession());
+        ps.setString(3, user.getEmail());
+
+        return ps.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+        System.out.println("❌ Error updating profile.");
+    }
+    return false;
+}
 
     @Override
 public List<User> findMatches(User user) {
 
     List<User> list = new ArrayList<>();
 
-    // Show all opposite-gender profiles
+
     String sql = "SELECT name, profession FROM users WHERE gender=?";
 
     try (Connection con = DBConnection.getConnection();
